@@ -1,7 +1,7 @@
 # Oversea-saw / 跷跷板
 
 > 本项目系基于Android平台的软件工程课程设计  
-> **截止日期：2020-1-3**  
+> **截止日期：2020-1-11**  
 > An Android based project for Software Engineering course design.  
 
 ## 要求
