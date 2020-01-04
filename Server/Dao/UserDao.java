@@ -80,7 +80,7 @@ public class UserDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update ordinary_user set usr_email = '?',usr_name = '?',usr_pswd = '?',usr_birth = '?',usr_sex = '?',usr_tel = '?',usr_school = '?',reg_time = '?',usr_authenticated = '?' where usr_id = ?;");
+			preparedStatement = connection.prepareStatement("update ordinary_user set usr_email = ?,usr_name = ?,usr_pswd = ?,usr_birth = ?,usr_sex = ?,usr_tel = ?,usr_school = ?,reg_time = ?,usr_authenticated = ? where usr_id = ?;");
 			preparedStatement.setString(1, user.getUsr_email());
 			preparedStatement.setString(2, user.getUsr_name());
 			preparedStatement.setString(3, user.getUsr_pswd());
