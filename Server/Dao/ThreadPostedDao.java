@@ -33,8 +33,6 @@ public class ThreadPostedDao extends DBHelper{
 				threadPostedEntitys.add(AthreadPostedEntity);
 			}
 		} catch (SQLException e) {
-			System.out.println("ThreadPostedEntity查询错误");
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -55,8 +53,7 @@ public class ThreadPostedDao extends DBHelper{
 			preparedStatement.setInt(5, threadPostedEntity.getThr_replyto());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
-			System.out.println("ThreadPostedEntity增加条目错误");
+			// TODO 锟皆讹拷锟斤拷锟缴碉拷 catch 锟斤拷
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -75,26 +72,24 @@ public class ThreadPostedDao extends DBHelper{
 			preparedStatement.setInt(5, threadPostedEntity.getThr_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
+			// TODO 锟皆讹拷锟斤拷锟缴碉拷 catch 锟斤拷
+
 			e.printStackTrace();
 		}finally{
-			System.out.println("UserEntity增加条目错误");
 			this.closeConnection(connection);
 		}
 	}
 	
-	public void deleteUserEntity(UserEntity user){
+	public void deleteThreadPostedEntity(ThreadPostedEntity threadPostedEntity){
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("delete from thread_posted where usr_id = ?;");
-			preparedStatement.setInt(1, user.getUsr_id());
+			preparedStatement = connection.prepareStatement("delete from thread_posted where thr_id = ?;");
+			preparedStatement.setInt(1, threadPostedEntity.getThr_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}finally{
-			System.out.println("UserEntity增加条目错误");
 			this.closeConnection(connection);
 		}
 	}

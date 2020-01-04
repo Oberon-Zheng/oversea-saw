@@ -16,10 +16,10 @@ public class AdminPendingAffairDao extends DBHelper{
 	 	Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet set = null;
-		List<AdminPendingAffairEntity> adminPendingAffairEntitys = new ArrayList<>();
+		List<AdminPendingAffairEntity> adminPendingAffairEntities = new ArrayList<>();
 		
 		try {
-			preparedStatement = connection.prepareStatement("select * from ordinary_user where aff_target_user = ? ;");
+			preparedStatement = connection.prepareStatement("select * from admin_pending_affair where aff_target_user = ?;");
 			preparedStatement.setInt(1, adminPendingAffairEntity.getAff_target_user());
 			set = preparedStatement.executeQuery();
 			while(set.next()){
@@ -29,82 +29,63 @@ public class AdminPendingAffairDao extends DBHelper{
 				AadminPendingAffairEntity.setAff_type(set.getInt("aff_type"));
 				AadminPendingAffairEntity.setAff_admin(set.getInt("aff_admin"));
 				AadminPendingAffairEntity.setAff_description(set.getString("aff_description"));
-				adminPendingAffairEntitys.add(AadminPendingAffairEntity);
+				adminPendingAffairEntities.add(AadminPendingAffairEntity);
 			}
 		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}finally{
-			System.out.println("UserEntity查询错误");
 			this.closeConnection(connection);
 		}
-		return adminPendingAffairEntitys;
+		return adminPendingAffairEntities;
 	}
 	
 	
-	public void addUserEntity(UserEntity user) {
+	public void addAdminPendingAffairEntity(AdminPendingAffairEntity adminPendingAffairEntity) {
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
-		int Stat = 0;
 		try {
-			preparedStatement = connection.prepareStatement("insert into ordinary_user (usr_email,usr_name,usr_pswd,usr_birth,usr_sex,usr_tel,usr_school,reg_time,usr_authenticated) values(?,?,?,?,?,?,?,?,?);");
-			preparedStatement.setString(1, user.getUsr_email());
-			preparedStatement.setString(2, user.getUsr_name());
-			preparedStatement.setString(3, user.getUsr_pswd());
-			preparedStatement.setDate(4, user.getUsr_birth());
-			preparedStatement.setString(5, user.getUsr_sex());
-			preparedStatement.setString(6, user.getUsr_tel());
-			preparedStatement.setInt(7, user.getUsr_school());
-			preparedStatement.setDate(8, user.getReg_time());
-			preparedStatement.setInt(9, user.getUsr_authenticated());
-			Stat = preparedStatement.executeUpdate();
+			preparedStatement = connection.prepareStatement("insert into admin_pending_affair (aff_target_user,aff_type,usr_pswd,aff_admin,aff_description) values(?,?,?,?);");
+			preparedStatement.setInt(1, adminPendingAffairEntity.getAff_target_user());
+			preparedStatement.setInt(2, adminPendingAffairEntity.getAff_type());
+			preparedStatement.setInt(3, adminPendingAffairEntity.getAff_admin());
+			preparedStatement.setString(4, adminPendingAffairEntity.getAff_description());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}finally{
-			System.out.println("UserEntity增加条目错误");
 			this.closeConnection(connection);
 		}
-		System.out.println("UserEntity增加结果"+Stat);
 	}
 	
-	public void changeUserEntity(UserEntity user){
+	public void changeAdminPendingAffairEntity(AdminPendingAffairEntity adminPendingAffairEntity){
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update ordinary_user set usr_email = '?',usr_name = '?',usr_pswd = '?',usr_birth = '?',usr_sex = '?',usr_tel = '?',usr_school = '?',reg_time = '?',usr_authenticated = '?' where thr_id = ?;");
-			preparedStatement.setString(1, user.getUsr_email());
-			preparedStatement.setString(2, user.getUsr_name());
-			preparedStatement.setString(3, user.getUsr_pswd());
-			preparedStatement.setDate(4, user.getUsr_birth());
-			preparedStatement.setString(5, user.getUsr_sex());
-			preparedStatement.setString(6, user.getUsr_tel());
-			preparedStatement.setInt(7, user.getUsr_school());
-			preparedStatement.setDate(8, user.getReg_time());
-			preparedStatement.setInt(9, user.getUsr_authenticated());
-			preparedStatement.setInt(10, user.getUsr_id());
+			preparedStatement = connection.prepareStatement("update admin_pending_affair set aff_target_user = '?',aff_type = '?',aff_admin = '?',aff_description = '?' where aff_id = ?;");
+			preparedStatement.setInt(1, adminPendingAffairEntity.getAff_target_user());
+			preparedStatement.setInt(2, adminPendingAffairEntity.getAff_type());
+			preparedStatement.setInt(3, adminPendingAffairEntity.getAff_admin());
+			preparedStatement.setString(4, adminPendingAffairEntity.getAff_description());
+			preparedStatement.setInt(5, adminPendingAffairEntity.getAff_id());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+	}
+	
+	public void deleteAdminPendingAffairEntity(AdminPendingAffairEntity adminPendingAffairEntity){
+		Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = connection.prepareStatement("delete from admin_pending_affair where aff_id = ?;");
+			preparedStatement.setInt(5, adminPendingAffairEntity.getAff_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}finally{
-			System.out.println("UserEntity增加条目错误");
-			this.closeConnection(connection);
-		}
-	}
-	
-	public void deleteUserEntity(UserEntity user){
-		Connection connection = this.getConnection();
-		PreparedStatement preparedStatement = null;
-		try {
-			preparedStatement = connection.prepareStatement("delete from ordinary_user where usr_id = ?;");
-			preparedStatement.setInt(1, user.getUsr_id());
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}finally{
-			System.out.println("UserEntity增加条目错误");
 			this.closeConnection(connection);
 		}
 	}
