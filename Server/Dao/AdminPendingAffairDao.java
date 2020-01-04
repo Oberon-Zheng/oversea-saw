@@ -61,7 +61,7 @@ public class AdminPendingAffairDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update admin_pending_affair set aff_target_user = '?',aff_type = '?',aff_admin = '?',aff_description = '?' where aff_id = ?;");
+			preparedStatement = connection.prepareStatement("update admin_pending_affair set aff_target_user = ?,aff_type = ?,aff_admin = ?,aff_description = ? where aff_id = ?;");
 			preparedStatement.setInt(1, adminPendingAffairEntity.getAff_target_user());
 			preparedStatement.setInt(2, adminPendingAffairEntity.getAff_type());
 			preparedStatement.setInt(3, adminPendingAffairEntity.getAff_admin());
@@ -83,7 +83,7 @@ public class AdminPendingAffairDao extends DBHelper{
 			preparedStatement.setInt(5, adminPendingAffairEntity.getAff_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO Ã—Ã”Â¶Â¯Ã‰ÃºÂ³Ã‰ÂµÃ„ catch Â¿Ã©
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
