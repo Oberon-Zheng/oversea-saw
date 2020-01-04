@@ -55,7 +55,7 @@ public class AffTypesetDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update aff_typeset set aff_typename = '?' where aff_typeid = ?;");
+			preparedStatement = connection.prepareStatement("update aff_typeset set aff_typename = ? where aff_typeid = ?;");
 			preparedStatement.setString(1, affTypesetEntity.getAff_typename());
 			preparedStatement.setInt(2, affTypesetEntity.getAff_typeid());
 			preparedStatement.executeUpdate();
