@@ -47,7 +47,7 @@ public class ImageDao extends DBHelper{
 			preparedStatement.setString(2, imageEntity.getImg_url());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO Ã—Ã”Â¶Â¯Ã‰ÃºÂ³Ã‰ÂµÃ„ catch Â¿Ã©
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -58,11 +58,7 @@ public class ImageDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-<<<<<<< HEAD
 			preparedStatement = connection.prepareStatement("update image set thread_posted_thr_id = ?,img_url = ? where img_id = ?;");
-=======
-			preparedStatement = connection.prepareStatement("update image set thread_posted_thr_id = '?',img_url = '?' where img_id = ?;");
->>>>>>> master
 			preparedStatement.setInt(1, imageEntity.getThread_posted_thr_id());
 			preparedStatement.setString(2, imageEntity.getImg_url());
 			preparedStatement.setInt(3, imageEntity.getImg_id());
