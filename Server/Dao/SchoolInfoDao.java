@@ -33,7 +33,7 @@ public class SchoolInfoDao extends DBHelper{
 				schoolInfoEntitys.add(AschoolInfoEntity);
 			}
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -53,7 +53,7 @@ public class SchoolInfoDao extends DBHelper{
 			preparedStatement.setString(4, schoolInfoEntity.getSch_tel());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -64,7 +64,7 @@ public class SchoolInfoDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update school_info set sch_name = '?',sch_country = '?',sch_address = '?',sch_tel = '?' where sch_id = ?;");
+			preparedStatement = connection.prepareStatement("update school_info set sch_name = ?,sch_country = ?,sch_address = ?,sch_tel = ? where sch_id = ?;");
 			preparedStatement.setString(1, schoolInfoEntity.getSch_name());
 			preparedStatement.setString(2, schoolInfoEntity.getSch_country());
 			preparedStatement.setString(3, schoolInfoEntity.getSch_address());
@@ -72,7 +72,7 @@ public class SchoolInfoDao extends DBHelper{
 			preparedStatement.setInt(5, schoolInfoEntity.getSch_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -87,7 +87,7 @@ public class SchoolInfoDao extends DBHelper{
 			preparedStatement.setInt(1, schoolInfoEntity.getSch_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);

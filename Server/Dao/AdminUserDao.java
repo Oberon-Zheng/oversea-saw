@@ -60,7 +60,7 @@ public class AdminUserDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update admin_user set adm_name = '?',adm_pswd = '?' where adm_id = ?;");
+			preparedStatement = connection.prepareStatement("update admin_user set adm_name = ?,adm_pswd = ? where adm_id = ?;");
 			preparedStatement.setString(1, adminUserEntity.getAdm_name());
 			preparedStatement.setString(2, adminUserEntity.getAdm_pswd());
 			preparedStatement.setInt(3, adminUserEntity.getAdm_id());
@@ -80,7 +80,7 @@ public class AdminUserDao extends DBHelper{
 			preparedStatement.setInt(5, adminUserEntity.getAdm_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);

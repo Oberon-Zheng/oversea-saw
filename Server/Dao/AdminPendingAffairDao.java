@@ -83,7 +83,7 @@ public class AdminPendingAffairDao extends DBHelper{
 			preparedStatement.setInt(5, adminPendingAffairEntity.getAff_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO 脳脭露炉脡煤鲁脡碌脛 catch 驴茅
+			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);

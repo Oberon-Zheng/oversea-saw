@@ -29,7 +29,7 @@ public class PoiTypesetDao extends DBHelper{
 				poiTypesetEntitys.add(ApoiTypesetEntity);
 			}
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -42,11 +42,11 @@ public class PoiTypesetDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("insert into poi_typeset (poi_typeid) values(?);");
+			preparedStatement = connection.prepareStatement("insert into poi_typeset (poi_typename) values(?);");
 			preparedStatement.setString(1, poiTypesetEntity.getPoi_typename());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -57,12 +57,12 @@ public class PoiTypesetDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update poi_typeset set poi_typename = '?' where poi_typeid = ?;");
+			preparedStatement = connection.prepareStatement("update poi_typeset set poi_typename = ? where poi_typeid = ?;");
 			preparedStatement.setString(1, poiTypesetEntity.getPoi_typename());
 			preparedStatement.setInt(2, poiTypesetEntity.getPoi_typeid());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -77,7 +77,7 @@ public class PoiTypesetDao extends DBHelper{
 			preparedStatement.setInt(1, poiTypesetEntity.getPoi_typeid());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);

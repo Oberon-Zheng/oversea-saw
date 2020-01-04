@@ -64,7 +64,7 @@ public class ThreadPostedDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update thread_posted set thr_author = '?',thr_text = '?',thr_type = '?',thr_type = '?',thr_enabled = '?',thr_replyto = '?' where thr_id = ?;");
+			preparedStatement = connection.prepareStatement("update thread_posted set thr_author = ?,thr_text = ?,thr_type = ?,thr_type = ?,thr_enabled = ?,thr_replyto = ? where thr_id = ?;");
 			preparedStatement.setInt(1, threadPostedEntity.getThr_author());
 			preparedStatement.setString(2, threadPostedEntity.getThr_text());
 			preparedStatement.setInt(3, threadPostedEntity.getThr_type());

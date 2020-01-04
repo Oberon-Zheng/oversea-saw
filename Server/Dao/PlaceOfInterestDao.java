@@ -50,7 +50,7 @@ public class PlaceOfInterestDao extends DBHelper{
 			preparedStatement.setInt(3, placeOfInterestEntity.getPoi_type());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -61,7 +61,7 @@ public class PlaceOfInterestDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update place_of_interest set poi_name = '?',poi_nearschool = '?',poi_type = '?' where poi_id = ?;");
+			preparedStatement = connection.prepareStatement("update place_of_interest set poi_name = ?,poi_nearschool = ?,poi_type = ? where poi_id = ?;");
 			preparedStatement.setString(1, placeOfInterestEntity.getPoi_name());
 			preparedStatement.setInt(2, placeOfInterestEntity.getPoi_nearschool());
 			preparedStatement.setInt(3, placeOfInterestEntity.getPoi_type());

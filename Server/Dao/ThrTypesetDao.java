@@ -46,7 +46,7 @@ public class ThrTypesetDao extends DBHelper{
 			preparedStatement.setString(1, thrTypesetEntity.getThr_typename());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -57,12 +57,12 @@ public class ThrTypesetDao extends DBHelper{
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = connection.prepareStatement("update thr_typeset set thr_typename = '?' where thr_typeid = ?;");
+			preparedStatement = connection.prepareStatement("update thr_typeset set thr_typename = ? where thr_typeid = ?;");
 			preparedStatement.setString(1, thrTypesetEntity.getThr_typename());
 			preparedStatement.setInt(2, thrTypesetEntity.getThr_typeid());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
