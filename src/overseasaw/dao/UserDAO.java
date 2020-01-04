@@ -10,6 +10,8 @@ public class UserDAO
 	private String tel;
 	private String password;
 	private Gender sex;
+	private String nationality;
+	private boolean authenticated;
 	
 	public String getEmail() {
 		return email;
@@ -62,6 +64,12 @@ public class UserDAO
 	public void setId(int id) {
 		this.id = id;
 	}
+	public String getNationality() {
+		return nationality;
+	}
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
 	
 	public static final int regSuccess = 0;
 	public static final int regNameDup = -1;
@@ -106,7 +114,7 @@ public class UserDAO
 	{
 		int result = regSuccess;
 		
-		Connection conn = DBConnection.GetConnection();
+		Connection conn = DBConnection.GetConn();
 		PreparedStatement prstm = null;
 		ResultSet rs = null;
 		String qform = "select usr_id from ordinary_user where %s = ?;";
@@ -153,7 +161,7 @@ public class UserDAO
 					return regTelDup;
 				}
 				
-				prstm = conn.prepareStatement("insert into ordinary_user values(default,?,?,?,default,?,?,now());");
+				prstm = conn.prepareStatement("insert into ordinary_user(usr_email,usr_name,usr_pswd,usr_sex,usr_tel,reg_time) values(?,?,?,?,?,now());");
 				prstm.setString(1, usr.email);
 				prstm.setString(2, usr.name);
 				prstm.setString(3, password);
@@ -186,7 +194,7 @@ public class UserDAO
 		int uid = 0;
 		try
 		{
-			conn = DBConnection.GetConnection();
+			conn = DBConnection.GetConn();
 			prstm = conn.prepareStatement("select usr_id from ordinary_user where usr_email=? and usr_pswd=?");
 			prstm.setString(1,email);
 			prstm.setString(2,password);
@@ -209,6 +217,12 @@ public class UserDAO
 			DBConnection.CleanConn(rs, prstm, conn);
 		}
 		return uid;
+	}
+	public boolean isAuthenticated() {
+		return authenticated;
+	}
+	public void setAuthenticated(boolean authenticated) {
+		this.authenticated = authenticated;
 	}
 	
 }

@@ -10,7 +10,7 @@ import com.mysql.cj.jdbc.Driver;
 
 public class DBConnection {
 	
-	public static Connection GetConnection()
+	public static Connection GetConn()
 	{
 		Connection conn = null;
 		try
