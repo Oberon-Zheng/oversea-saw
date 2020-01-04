@@ -50,7 +50,7 @@ public class PlaceOfInterestDao extends DBHelper{
 			preparedStatement.setInt(3, placeOfInterestEntity.getPoi_type());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
