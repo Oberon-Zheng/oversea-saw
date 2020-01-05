@@ -47,7 +47,64 @@ public class UserDao extends DBHelper{
 		}
 		return users;
 	}
+	public List<UserEntity> getUserEntityByName(String name) {
+	 	Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		List<UserEntity> users = new ArrayList<>();
+		
+		try {
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_name = ?;");
+			preparedStatement.setString(1, name);
+			set = preparedStatement.executeQuery();
+			while(set.next()){
+				UserEntity Auser = new UserEntity();
+				Auser.setUsr_id(set.getInt("usr_id"));
+				Auser.setUsr_email(set.getString("usr_email"));
+				Auser.setUsr_name(set.getString("usr_name"));
+				Auser.setUsr_pswd(set.getString("usr_pswd"));
+				Auser.setUsr_birth(set.getDate("usr_birth"));
+				Auser.setUsr_sex(set.getString("usr_sex"));
+				Auser.setUsr_tel(set.getString("usr_tel"));
+				Auser.setUsr_school(set.getInt("usr_school"));
+				Auser.setReg_time(set.getDate("reg_time"));
+				Auser.setUsr_authenticated(set.getInt("usr_authenticated"));
+				users.add(Auser);
+			}
+		} catch (SQLException e) {
+
+			System.out.println("UserEntity��ѯ����");
+			// TODO �Զ����ɵ� catch ��
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return users;
+	}
 	
+	public boolean uniqueValidation(UserEntity user) {
+		boolean unique = true;
+	 	Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		try {
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_email = ? or usr_name = ?;");
+			preparedStatement.setString(1, user.getUsr_email());
+			preparedStatement.setString(2, user.getUsr_name());
+			set = preparedStatement.executeQuery();
+			if(set.next()) {
+				unique = false;
+			}
+		} catch (SQLException e) {
+
+			System.out.println("UserEntity��ѯ����");
+			// TODO �Զ����ɵ� catch ��
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return unique;
+	}
 	
 	public void addUserEntity(UserEntity user) {
 		Connection connection = this.getConnection();
@@ -75,8 +132,6 @@ public class UserDao extends DBHelper{
 		}
 		System.out.println("UserEntity���ӽ��"+Stat);
 	}
-	
-	
 	public void changeUserEntity(UserEntity user){
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
@@ -101,8 +156,6 @@ public class UserDao extends DBHelper{
 			this.closeConnection(connection);
 		}
 	}
-	
-	
 	public void deleteUserEntity(UserEntity user){
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
@@ -119,4 +172,5 @@ public class UserDao extends DBHelper{
 			this.closeConnection(connection);
 		}
 	}
+
 }
