@@ -1,4 +1,4 @@
-package Dao;
+package overseasaw.server.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import Entity.UserEntity;
-import Helper.DBHelper;
+
+import overseasaw.database.util.DBHelper;
+import overseasaw.server.entity.UserEntity;
 
 public class UserDao extends DBHelper{
 
@@ -38,8 +39,8 @@ public class UserDao extends DBHelper{
 			}
 		} catch (SQLException e) {
 
-			System.out.println("UserEntity²éÑ¯´íÎó");
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			System.out.println("UserEntityï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½");
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -66,13 +67,13 @@ public class UserDao extends DBHelper{
 			Stat = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 
-			System.out.println("UserEntityÔö¼ÓÌõÄ¿´íÎó");
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			System.out.println("UserEntityï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½");
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
 		}
-		System.out.println("UserEntityÔö¼Ó½á¹û"+Stat);
+		System.out.println("UserEntityï¿½ï¿½ï¿½Ó½ï¿½ï¿½"+Stat);
 	}
 	
 	
@@ -93,8 +94,8 @@ public class UserDao extends DBHelper{
 			preparedStatement.setInt(10, user.getUsr_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("UserEntityÔö¼ÓÌõÄ¿´íÎó");
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			System.out.println("UserEntityï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½");
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -111,8 +112,8 @@ public class UserDao extends DBHelper{
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 
-			System.out.println("UserEntityÔö¼ÓÌõÄ¿´íÎó");
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			System.out.println("UserEntityï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½");
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);

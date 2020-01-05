@@ -1,4 +1,4 @@
-package Dao;
+package overseasaw.server.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entity.ThrTypesetEntity;
-import Entity.UserEntity;
-import Helper.DBHelper;
+import overseasaw.database.util.DBHelper;
+import overseasaw.server.entity.ThrTypesetEntity;
 
 public class ThrTypesetDao extends DBHelper{
 

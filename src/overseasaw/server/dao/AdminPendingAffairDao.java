@@ -1,4 +1,4 @@
-package Dao;
+package overseasaw.server.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import Entity.AdminPendingAffairEntity;
-import Entity.UserEntity;
-import Helper.DBHelper;
+import overseasaw.server.entity.*;
+import overseasaw.database.util.DBHelper;
 
 public class AdminPendingAffairDao extends DBHelper{
 
@@ -83,7 +82,7 @@ public class AdminPendingAffairDao extends DBHelper{
 			preparedStatement.setInt(5, adminPendingAffairEntity.getAff_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+			// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);

@@ -1,4 +1,4 @@
-package Dao;
+package overseasaw.server.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entity.ThreadPostedEntity;
-import Entity.UserEntity;
-import Helper.DBHelper;
+import overseasaw.database.util.DBHelper;
+import overseasaw.server.entity.ThreadPostedEntity;
 
 public class ThreadPostedDao extends DBHelper{
 

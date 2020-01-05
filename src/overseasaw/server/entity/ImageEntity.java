@@ -1,4 +1,4 @@
-package Entity;
+package overseasaw.server.entity;
 
 public class ImageEntity {
 

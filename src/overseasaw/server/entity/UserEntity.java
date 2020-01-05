@@ -1,4 +1,4 @@
-package Entity;
+package overseasaw.server.entity;
 
 import java.sql.Date;
 

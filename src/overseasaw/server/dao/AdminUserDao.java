@@ -1,4 +1,4 @@
-package Dao;
+package overseasaw.server.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entity.AdminPendingAffairEntity;
-import Entity.AdminUserEntity;
-import Entity.UserEntity;
-import Helper.DBHelper;
+import overseasaw.database.util.DBHelper;
+import overseasaw.server.entity.AdminUserEntity;
 
 public class AdminUserDao extends DBHelper{
 

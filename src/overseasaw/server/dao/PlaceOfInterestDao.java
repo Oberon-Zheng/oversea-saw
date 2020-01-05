@@ -1,4 +1,4 @@
-package Dao;
+package overseasaw.server.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entity.PlaceOfInterestEntity;
-import Entity.UserEntity;
-import Helper.DBHelper;
+import overseasaw.database.util.DBHelper;
+import overseasaw.server.entity.PlaceOfInterestEntity;
 
 public class PlaceOfInterestDao extends DBHelper{
 
@@ -29,7 +28,7 @@ public class PlaceOfInterestDao extends DBHelper{
 				AplaceOfInterestEntity.setPoi_name(set.getString("poi_name"));
 				AplaceOfInterestEntity.setPoi_nearschool(set.getInt("poi_nearschool"));
 				AplaceOfInterestEntity.setPoi_type(set.getInt("poi_type"));
-				placeOfInterestEntitys.add(placeOfInterestEntitys);
+				placeOfInterestEntitys.add(AplaceOfInterestEntity);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
