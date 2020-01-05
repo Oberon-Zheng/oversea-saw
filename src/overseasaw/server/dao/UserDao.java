@@ -81,23 +81,92 @@ public class UserDao extends DBHelper{
 		}
 		return users;
 	}
-	
-	public boolean uniqueValidation(UserEntity user) {
+	public List<UserEntity> getUserEntityByEmail(String email) {
+	 	Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		List<UserEntity> users = new ArrayList<>();
+		
+		try {
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_email = ?;");
+			preparedStatement.setString(1, email);
+			set = preparedStatement.executeQuery();
+			while(set.next()){
+				UserEntity Auser = new UserEntity();
+				Auser.setUsr_id(set.getInt("usr_id"));
+				Auser.setUsr_email(set.getString("usr_email"));
+				Auser.setUsr_name(set.getString("usr_name"));
+				Auser.setUsr_pswd(set.getString("usr_pswd"));
+				Auser.setUsr_birth(set.getDate("usr_birth"));
+				Auser.setUsr_sex(set.getString("usr_sex"));
+				Auser.setUsr_tel(set.getString("usr_tel"));
+				Auser.setUsr_school(set.getInt("usr_school"));
+				Auser.setReg_time(set.getDate("reg_time"));
+				Auser.setUsr_authenticated(set.getInt("usr_authenticated"));
+				users.add(Auser);
+			}
+		} catch (SQLException e) {
+
+			System.out.println("UserEntity��ѯ����");
+			// TODO �Զ����ɵ� catch ��
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return users;
+	}
+	public List<UserEntity> getUserEntityByTel(String tel) {
+	 	Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		List<UserEntity> users = new ArrayList<>();
+		
+		try {
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_tel = ?;");
+			preparedStatement.setString(1, tel);
+			set = preparedStatement.executeQuery();
+			while(set.next()){
+				UserEntity Auser = new UserEntity();
+				Auser.setUsr_id(set.getInt("usr_id"));
+				Auser.setUsr_email(set.getString("usr_email"));
+				Auser.setUsr_name(set.getString("usr_name"));
+				Auser.setUsr_pswd(set.getString("usr_pswd"));
+				Auser.setUsr_birth(set.getDate("usr_birth"));
+				Auser.setUsr_sex(set.getString("usr_sex"));
+				Auser.setUsr_tel(set.getString("usr_tel"));
+				Auser.setUsr_school(set.getInt("usr_school"));
+				Auser.setReg_time(set.getDate("reg_time"));
+				Auser.setUsr_authenticated(set.getInt("usr_authenticated"));
+				users.add(Auser);
+			}
+		} catch (SQLException e) {
+
+			System.out.println("UserEntity��ѯ����");
+			// TODO �Զ����ɵ� catch ��
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return users;
+	}
+
+	public boolean exists(UserEntity user) {
 		boolean unique = true;
 	 	Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet set = null;
 		try {
-			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_email = ? or usr_name = ?;");
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_email = ? or usr_name = ? or (usr_tel = ? and usr_tel is not null);");
 			preparedStatement.setString(1, user.getUsr_email());
 			preparedStatement.setString(2, user.getUsr_name());
+			preparedStatement.setString(3, user.getUsr_tel());
 			set = preparedStatement.executeQuery();
 			if(set.next()) {
 				unique = false;
 			}
 		} catch (SQLException e) {
 
-			System.out.println("UserEntity��ѯ����");
+			System.out.println("UserEntity\t");
 			// TODO �Զ����ɵ� catch ��
 			e.printStackTrace();
 		}finally{
