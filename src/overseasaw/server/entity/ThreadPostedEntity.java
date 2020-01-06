@@ -6,7 +6,7 @@ public class ThreadPostedEntity {
 	private int thr_author;
 	private String thr_text;
 	private int thr_type;
-	private int thr_enabled;
+	private boolean thr_enabled;
 	private int thr_replyto;
 	
 	public int getThr_id() {
@@ -33,10 +33,10 @@ public class ThreadPostedEntity {
 	public void setThr_type(int thr_type) {
 		this.thr_type = thr_type;
 	}
-	public int getThr_enabled() {
+	public boolean getThr_enabled() {
 		return thr_enabled;
 	}
-	public void setThr_enabled(int thr_enabled) {
+	public void setThr_enabled(boolean thr_enabled) {
 		this.thr_enabled = thr_enabled;
 	}
 	public int getThr_replyto() {

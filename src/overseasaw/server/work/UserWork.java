@@ -7,6 +7,7 @@ import overseasaw.server.dao.UserDao;
 import overseasaw.server.entity.UserEntity;
 
 public class UserWork {
+	
 	public static boolean TryRegister(UserEntity ruser) {
 		boolean regResult = true;
 		UserDao ud = new UserDao();
@@ -39,5 +40,5 @@ public class UserWork {
 		}
 		return entity;
 	}
-
+	
 }

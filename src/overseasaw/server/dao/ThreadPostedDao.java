@@ -27,7 +27,7 @@ public class ThreadPostedDao extends DBHelper{
 				AthreadPostedEntity.setThr_author(set.getInt("thr_author"));
 				AthreadPostedEntity.setThr_text(set.getString("thr_text"));
 				AthreadPostedEntity.setThr_type(set.getInt("thr_type"));
-				AthreadPostedEntity.setThr_enabled(set.getInt("thr_enabled"));
+				AthreadPostedEntity.setThr_enabled(set.getBoolean("thr_enabled"));
 				AthreadPostedEntity.setThr_replyto(set.getInt("thr_replyto"));
 				threadPostedEntitys.add(AthreadPostedEntity);
 			}
@@ -38,7 +38,33 @@ public class ThreadPostedDao extends DBHelper{
 		}
 		return threadPostedEntitys;
 	}
-	
+	public List<ThreadPostedEntity> getThreadPostedEntityById(int id) {
+	 	Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		List<ThreadPostedEntity> threadPostedEntitys = new ArrayList<>();
+		try {
+			preparedStatement = connection.prepareStatement("select * from thread_posted where thr_id = ?;");
+			preparedStatement.setInt(1, id);
+			set = preparedStatement.executeQuery();
+			while(set.next()){
+				ThreadPostedEntity AthreadPostedEntity = new ThreadPostedEntity();
+				AthreadPostedEntity.setThr_id(set.getInt("thr_id"));
+				AthreadPostedEntity.setThr_author(set.getInt("thr_author"));
+				AthreadPostedEntity.setThr_text(set.getString("thr_text"));
+				AthreadPostedEntity.setThr_type(set.getInt("thr_type"));
+				AthreadPostedEntity.setThr_enabled(set.getBoolean("thr_enabled"));
+				AthreadPostedEntity.setThr_replyto(set.getInt("thr_replyto"));
+				threadPostedEntitys.add(AthreadPostedEntity);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return threadPostedEntitys;
+	}
+
 	
 	public void addThreadPostedEntity(ThreadPostedEntity threadPostedEntity) {
 		Connection connection = this.getConnection();
@@ -48,11 +74,10 @@ public class ThreadPostedDao extends DBHelper{
 			preparedStatement.setInt(1, threadPostedEntity.getThr_author());
 			preparedStatement.setString(2, threadPostedEntity.getThr_text());
 			preparedStatement.setInt(3, threadPostedEntity.getThr_type());
-			preparedStatement.setInt(4, threadPostedEntity.getThr_enabled());
+			preparedStatement.setBoolean(4, threadPostedEntity.getThr_enabled());
 			preparedStatement.setInt(5, threadPostedEntity.getThr_replyto());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO �Զ����ɵ� catch ��
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -67,12 +92,10 @@ public class ThreadPostedDao extends DBHelper{
 			preparedStatement.setInt(1, threadPostedEntity.getThr_author());
 			preparedStatement.setString(2, threadPostedEntity.getThr_text());
 			preparedStatement.setInt(3, threadPostedEntity.getThr_type());
-			preparedStatement.setInt(4, threadPostedEntity.getThr_enabled());
+			preparedStatement.setBoolean(4, threadPostedEntity.getThr_enabled());
 			preparedStatement.setInt(5, threadPostedEntity.getThr_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO �Զ����ɵ� catch ��
-
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);

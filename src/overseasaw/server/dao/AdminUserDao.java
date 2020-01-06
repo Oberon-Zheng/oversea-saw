@@ -16,7 +16,7 @@ public class AdminUserDao extends DBHelper{
 	 	Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet set = null;
-		List<AdminUserEntity> adminPendingAffairEntities = new ArrayList<>();
+		List<AdminUserEntity> adminUserEntities = new ArrayList<>();
 		
 		try {
 			preparedStatement = connection.prepareStatement("select * from admin_user where adm_name = ?;");
@@ -24,19 +24,43 @@ public class AdminUserDao extends DBHelper{
 			set = preparedStatement.executeQuery();
 			while(set.next()){
 				AdminUserEntity AadminUserEntity = new AdminUserEntity();
-				AadminUserEntity.setAdm_id(set.getInt("aff_id"));
-				AadminUserEntity.setAdm_name(set.getString("aff_target_user"));
-				AadminUserEntity.setAdm_pswd(set.getString("aff_type"));
-				adminPendingAffairEntities.add(AadminUserEntity);
+				AadminUserEntity.setAdm_id(set.getInt("adm_id"));
+				AadminUserEntity.setAdm_name(set.getString("adm_name"));
+				AadminUserEntity.setAdm_pswd(set.getString("adm_pswd"));
+				adminUserEntities.add(AadminUserEntity);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
 		}
-		return adminPendingAffairEntities;
+		return adminUserEntities;
 	}
-	
+	public List<AdminUserEntity> getAdminUserEntityByName(String name) {
+	 	Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		List<AdminUserEntity> adminUserEntities = new ArrayList<>();
+		
+		try {
+			preparedStatement = connection.prepareStatement("select * from admin_user where adm_name = ?;");
+			preparedStatement.setString(1, name);
+			set = preparedStatement.executeQuery();
+			while(set.next()){
+				AdminUserEntity AadminUserEntity = new AdminUserEntity();
+				AadminUserEntity.setAdm_id(set.getInt("adm_id"));
+				AadminUserEntity.setAdm_name(set.getString("adm_name"));
+				AadminUserEntity.setAdm_pswd(set.getString("adm_pswd"));
+				adminUserEntities.add(AadminUserEntity);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return adminUserEntities;
+	}
+
 	
 	public void addAdminUserEntity(AdminUserEntity adminUserEntity) {
 		Connection connection = this.getConnection();

@@ -13,17 +13,13 @@ public class DBHelper {
 		Connection conn = null;
 		Properties jdbcprop = new Properties();
 		try {
-			jdbcprop.load(new FileInputStream("/WEB-INF/dbconfig.properties"));
-			String driver = jdbcprop.getProperty("driver");
+			String driver = "com.mysql.cj.jdbc.Driver";
 			Class.forName(driver);
 			conn = DriverManager.getConnection(
-					jdbcprop.getProperty("conn_string"),
-					jdbcprop.getProperty("user"),
-					jdbcprop.getProperty("password") 
+					"jdbc:mysql://localhost:3306/oversea_saw?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC",
+					"root",
+					"0608150698" 
 					);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

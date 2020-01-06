@@ -14,5 +14,11 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.18.jar"/>
+	<classpathentry kind="lib" path="P:/eclipse-workspace/Oversea-saw/mybatis-3.5.3/mybatis-3.5.3.jar"/>
+	<classpathentry kind="lib" path="src/fastjson-1.2.62.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

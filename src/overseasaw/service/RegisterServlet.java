@@ -1,11 +1,15 @@
 package overseasaw.service;
 
 import java.io.IOException;
+import java.util.Scanner;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSONObject;
 
 import overseasaw.dao.UserDAO;
 
@@ -30,6 +34,13 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
+		Scanner reader = new Scanner(request.getInputStream());
+		String strContent = reader.nextLine();
+		JSONObject jsonReq = JSONObject.parseObject(strContent);
+		Integer i = jsonReq.getInteger("usr_id");
+		
 		String 	uname = request.getParameter("uname"),
 				umail = request.getParameter("umail"),
 				upswd = request.getParameter("upswd"),
@@ -46,6 +57,7 @@ public class RegisterServlet extends HttpServlet {
 		{
 			System.out.println("=================可注册并成功===============");
 		}
+		reader.close();
 		response.getWriter().write(String.format("%d", rsucc));
 	}
 

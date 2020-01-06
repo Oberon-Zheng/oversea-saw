@@ -34,7 +34,7 @@ public class UserDao extends DBHelper{
 				Auser.setUsr_tel(set.getString("usr_tel"));
 				Auser.setUsr_school(set.getInt("usr_school"));
 				Auser.setReg_time(set.getDate("reg_time"));
-				Auser.setUsr_authenticated(set.getInt("usr_authenticated"));
+				Auser.setUsr_authenticated(set.getBoolean("usr_authenticated"));
 				users.add(Auser);
 			}
 		} catch (SQLException e) {
@@ -68,7 +68,7 @@ public class UserDao extends DBHelper{
 				Auser.setUsr_tel(set.getString("usr_tel"));
 				Auser.setUsr_school(set.getInt("usr_school"));
 				Auser.setReg_time(set.getDate("reg_time"));
-				Auser.setUsr_authenticated(set.getInt("usr_authenticated"));
+				Auser.setUsr_authenticated(set.getBoolean("usr_authenticated"));
 				users.add(Auser);
 			}
 		} catch (SQLException e) {
@@ -102,7 +102,7 @@ public class UserDao extends DBHelper{
 				Auser.setUsr_tel(set.getString("usr_tel"));
 				Auser.setUsr_school(set.getInt("usr_school"));
 				Auser.setReg_time(set.getDate("reg_time"));
-				Auser.setUsr_authenticated(set.getInt("usr_authenticated"));
+				Auser.setUsr_authenticated(set.getBoolean("usr_authenticated"));
 				users.add(Auser);
 			}
 		} catch (SQLException e) {
@@ -136,7 +136,7 @@ public class UserDao extends DBHelper{
 				Auser.setUsr_tel(set.getString("usr_tel"));
 				Auser.setUsr_school(set.getInt("usr_school"));
 				Auser.setReg_time(set.getDate("reg_time"));
-				Auser.setUsr_authenticated(set.getInt("usr_authenticated"));
+				Auser.setUsr_authenticated(set.getBoolean("usr_authenticated"));
 				users.add(Auser);
 			}
 		} catch (SQLException e) {
@@ -189,7 +189,7 @@ public class UserDao extends DBHelper{
 			preparedStatement.setString(6, user.getUsr_tel());
 			preparedStatement.setInt(7, user.getUsr_school());
 			preparedStatement.setDate(8, user.getReg_time());
-			preparedStatement.setInt(9, user.getUsr_authenticated());
+			preparedStatement.setBoolean(9, user.getUsr_authenticated());
 			Stat = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 
@@ -214,7 +214,7 @@ public class UserDao extends DBHelper{
 			preparedStatement.setString(6, user.getUsr_tel());
 			preparedStatement.setInt(7, user.getUsr_school());
 			preparedStatement.setDate(8, user.getReg_time());
-			preparedStatement.setInt(9, user.getUsr_authenticated());
+			preparedStatement.setBoolean(9, user.getUsr_authenticated());
 			preparedStatement.setInt(10, user.getUsr_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
