@@ -47,6 +47,7 @@ public class RegisterServlet extends HttpServlet {
 		JSONObject jsonResp = new JSONObject();
 		jsonResp.put("reg_result", success.value());
 		response.getWriter().write(jsonResp.toString());
+		System.out.println(jsonReq.toString(4));
 		reader.close();
 	}
 

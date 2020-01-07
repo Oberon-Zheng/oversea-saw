@@ -210,16 +210,15 @@ public class UserDao extends DBHelper{
 		PreparedStatement preparedStatement = null;
 		int Stat = 0;
 		try {
-			preparedStatement = connection.prepareStatement("insert into ordinary_user (usr_email,usr_name,usr_pswd,usr_birth,usr_sex,usr_tel,usr_school,reg_time,usr_authenticated) values(?,?,?,?,?,?,?,?,?);");
+			preparedStatement = connection.prepareStatement("insert into ordinary_user (usr_email,usr_name,usr_pswd,usr_birth,usr_sex,usr_tel,usr_school,reg_time,usr_authenticated) values(?,?,?,?,?,?,?,now(),?);");
 			preparedStatement.setString(1, user.getUsr_email());
 			preparedStatement.setString(2, user.getUsr_name());
 			preparedStatement.setString(3, user.getUsr_pswd());
 			preparedStatement.setDate(4, user.getUsr_birth());
-			preparedStatement.setInt(5, user.getUsr_sex().charAt(0));
+			preparedStatement.setString(5, user.getUsr_sex());
 			preparedStatement.setString(6, user.getUsr_tel());
 			preparedStatement.setInt(7, user.getUsr_school());
-			preparedStatement.setDate(8, user.getReg_time());
-			preparedStatement.setBoolean(9, user.getUsr_authenticated());
+			preparedStatement.setBoolean(8, user.getUsr_authenticated());
 			Stat = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 
@@ -268,5 +267,5 @@ public class UserDao extends DBHelper{
 			this.closeConnection(connection);
 		}
 	}
-
+	
 }
