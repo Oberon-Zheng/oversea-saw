@@ -1,7 +1,6 @@
 package overseasaw.service;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import javax.servlet.ServletException;
@@ -10,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSONObject;
+import org.json.*;
 
-import overseasaw.server.dao.UserDao;
 import overseasaw.server.entity.UserEntity;
 import overseasaw.server.work.UserWork;
 
@@ -43,11 +41,10 @@ public class LoginServlet extends HttpServlet {
 		reader.close();
 		System.out.println(strContent);
 		UserEntity user = null;
-		JSONObject jsonReq = JSONObject.parseObject(strContent);
+		JSONObject jsonReq = new JSONObject(strContent);
 		JSONObject jsonResp = null;
 		String temail = jsonReq.getString("usr_email");
 		String tpswd = jsonReq.getString("usr_pswd");
-		UserDao ud = new UserDao();
 		
 		user = UserWork.TryLogin(temail, tpswd);
 		
@@ -59,8 +56,8 @@ public class LoginServlet extends HttpServlet {
 			jsonResp = new JSONObject();
 			jsonResp.put("login_fail",user.getUsr_id());
 		}
-		System.out.println(jsonResp.toJSONString());
-		response.getWriter().write(jsonResp.toJSONString());
+		System.out.println(jsonResp.toString());
+		response.getWriter().write(jsonResp.toString());
 	}
 
 	/**

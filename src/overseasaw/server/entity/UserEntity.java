@@ -2,7 +2,7 @@ package overseasaw.server.entity;
 
 import java.sql.Date;
 
-import com.alibaba.fastjson.JSONObject;
+import org.json.*;
 
 public class UserEntity {
 
@@ -49,8 +49,8 @@ public class UserEntity {
 	public String getUsr_sex() {
 		return usr_sex;
 	}
-	public void setUsr_sex(String string) {
-		this.usr_sex = string;
+	public void setUsr_sex(String sex) {
+		this.usr_sex = sex;
 	}
 	public String getUsr_tel() {
 		return usr_tel;
@@ -77,15 +77,39 @@ public class UserEntity {
 		this.usr_authenticated = usr_authenticated;
 	}
 	
-	public static final int regSuccess = 0;
-	public static final int regNameDup = -1;
-	public static final int regEmailDup = -2;
-	public static final int regTelDup = -4;
-	public static final int regNameInvalid = 1;
-	public static final int regEmailInvalid = 2;
-	public static final int regPswdInvalid = 3;
-	public static final int regTelInvalid = 4;
-	public static final int regOtherFailure = 255;
+	public UserEntity()
+	{
+		usr_id = 0;
+		usr_email = null;
+		usr_name = null;
+		usr_pswd = null;
+		usr_birth = null;
+		usr_sex = "U";
+		usr_tel = null;
+		usr_school = 0;
+		reg_time = null;
+		usr_authenticated = false;
+	}
+	
+	public UserEntity(JSONObject json)
+	{
+		this();
+		if(json != null)
+		{
+			int datecode;
+			usr_id = json.optInt("usr_id", 0);
+			usr_email = json.optString("usr_email", null);
+			usr_name = json.optString("usr_name", null);
+			usr_pswd = json.optString("usr_pswd", null);
+			datecode = json.optInt("usr_birth", 0);
+			usr_birth = (datecode == 0) ? null : new Date(datecode);
+			usr_sex = json.optString("usr_sex", "U");
+			usr_school = json.optInt("usr_school", 0);
+			datecode = json.optInt("usr_regtime", 0);
+			reg_time = (datecode == 0) ? null : new Date(datecode);
+			usr_authenticated = json.optBoolean("usr_auth", false);
+		}
+	}
 	
 	public JSONObject Serialize()
 	{
@@ -97,7 +121,6 @@ public class UserEntity {
 		json.put("usr_birth",this.getUsr_birth());
 		json.put("usr_sex",this.getUsr_sex());
 		json.put("usr_school", this.getUsr_school());
-		json.put("usr_pswd", this.getUsr_pswd());
 		json.put("usr_regtime",this.getReg_time());
 		json.put("usr_auth",this.getUsr_authenticated());
 		return json;

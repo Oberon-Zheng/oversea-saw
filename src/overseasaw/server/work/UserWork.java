@@ -3,22 +3,24 @@ package overseasaw.server.work;
 import java.util.List;
 
 import overseasaw.database.util.LoginFailure;
+import overseasaw.database.util.RegisterFailure;
 import overseasaw.server.dao.UserDao;
 import overseasaw.server.entity.UserEntity;
 
 public class UserWork {
 	
-	public static boolean TryRegister(UserEntity ruser) {
-		boolean regResult = true;
+	public static RegisterFailure TryRegister(UserEntity ruser) {
+		RegisterFailure regResult = RegisterFailure.REG_SUCCESS;
 		UserDao ud = new UserDao();
-		if(ud.exists(ruser)) {
+		regResult = ud.existsWhich(ruser);
+
+		if(ud.existsWhich(ruser) == RegisterFailure.REG_SUCCESS) {
 			ud.addUserEntity(ruser);
 		}
-		else {
-			regResult = false;
-		}
+		
 		return regResult;
 	}
+	
 	public static UserEntity TryLogin(String email, String password) {
 		UserDao ud = new UserDao();
 		UserEntity entity = new UserEntity();

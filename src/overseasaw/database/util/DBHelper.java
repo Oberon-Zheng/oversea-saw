@@ -1,17 +1,14 @@
 package overseasaw.database.util;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class DBHelper {
 	
 	public Connection getConnection()
 	{
 		Connection conn = null;
-		Properties jdbcprop = new Properties();
 		try {
 			String driver = "com.mysql.cj.jdbc.Driver";
 			Class.forName(driver);

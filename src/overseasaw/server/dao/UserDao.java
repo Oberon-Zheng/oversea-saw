@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import overseasaw.database.util.DBHelper;
+import overseasaw.database.util.RegisterFailure;
 import overseasaw.server.entity.UserEntity;
 
 public class UserDao extends DBHelper{
@@ -40,7 +41,6 @@ public class UserDao extends DBHelper{
 		} catch (SQLException e) {
 
 			System.out.println("UserEntity��ѯ����");
-			// TODO �Զ����ɵ� catch ��
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -74,7 +74,6 @@ public class UserDao extends DBHelper{
 		} catch (SQLException e) {
 
 			System.out.println("UserEntity��ѯ����");
-			// TODO �Զ����ɵ� catch ��
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -108,7 +107,6 @@ public class UserDao extends DBHelper{
 		} catch (SQLException e) {
 
 			System.out.println("UserEntity��ѯ����");
-			// TODO �Զ����ɵ� catch ��
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -142,7 +140,6 @@ public class UserDao extends DBHelper{
 		} catch (SQLException e) {
 
 			System.out.println("UserEntity��ѯ����");
-			// TODO �Զ����ɵ� catch ��
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -152,7 +149,7 @@ public class UserDao extends DBHelper{
 
 	public boolean exists(UserEntity user) {
 		boolean unique = true;
-	 	Connection connection = this.getConnection();
+	 	Connection connection = getConnection();
 		PreparedStatement preparedStatement = null;
 		ResultSet set = null;
 		try {
@@ -167,7 +164,6 @@ public class UserDao extends DBHelper{
 		} catch (SQLException e) {
 
 			System.out.println("UserEntity\t");
-			// TODO �Զ����ɵ� catch ��
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -175,6 +171,40 @@ public class UserDao extends DBHelper{
 		return unique;
 	}
 	
+	public RegisterFailure existsWhich(UserEntity user) {
+		RegisterFailure regfail = RegisterFailure.REG_SUCCESS;
+	 	Connection connection = getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		try {
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_email = ?;");
+			preparedStatement.setString(1, user.getUsr_email());
+			set = preparedStatement.executeQuery();
+			if(set.next()) {
+				regfail = RegisterFailure.REG_EMAIL_DUP;
+			}
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_name = ?;");
+			preparedStatement.setString(1, user.getUsr_name());
+			set = preparedStatement.executeQuery();
+			if(set.next()) {
+				regfail = RegisterFailure.REG_NAME_DUP;
+			}
+			preparedStatement = connection.prepareStatement("select * from ordinary_user where usr_tel = ? and usr_tel is not null;");
+			preparedStatement.setString(1, user.getUsr_tel());
+			set = preparedStatement.executeQuery();
+			if(set.next()) {
+				regfail = RegisterFailure.REG_TEL_DUP;
+			}
+		} catch (SQLException e) {
+
+			System.out.println("UserEntity\t");
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return regfail;
+	}
+
 	public void addUserEntity(UserEntity user) {
 		Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
@@ -185,7 +215,7 @@ public class UserDao extends DBHelper{
 			preparedStatement.setString(2, user.getUsr_name());
 			preparedStatement.setString(3, user.getUsr_pswd());
 			preparedStatement.setDate(4, user.getUsr_birth());
-			preparedStatement.setString(5, user.getUsr_sex());
+			preparedStatement.setInt(5, user.getUsr_sex().charAt(0));
 			preparedStatement.setString(6, user.getUsr_tel());
 			preparedStatement.setInt(7, user.getUsr_school());
 			preparedStatement.setDate(8, user.getReg_time());
@@ -193,8 +223,7 @@ public class UserDao extends DBHelper{
 			Stat = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 
-			System.out.println("UserEntity������Ŀ����");
-			// TODO �Զ����ɵ� catch ��
+			System.out.println("UserEntity Corrupted");
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -218,8 +247,7 @@ public class UserDao extends DBHelper{
 			preparedStatement.setInt(10, user.getUsr_id());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("UserEntity������Ŀ����");
-			// TODO �Զ����ɵ� catch ��
+			System.out.println("UserEntity Corrupted");
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
@@ -234,8 +262,7 @@ public class UserDao extends DBHelper{
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 
-			System.out.println("UserEntity������Ŀ����");
-			// TODO �Զ����ɵ� catch ��
+			System.out.println("UserEntity Corrupted");
 			e.printStackTrace();
 		}finally{
 			this.closeConnection(connection);
