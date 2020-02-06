@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,32 @@ import overseasaw.server.entity.ThreadPostedEntity;
 
 public class ThreadPostedDao extends DBHelper{
 
+	public List<ThreadPostedEntity> getThreadPostedAll() {
+	 	Connection connection = this.getConnection();
+		PreparedStatement preparedStatement = null;
+		ResultSet set = null;
+		List<ThreadPostedEntity> threadPostedEntitys = new ArrayList<>();
+		try {
+			preparedStatement = connection.prepareStatement("select * from thread_posted where thr_enabled = true;");
+			set = preparedStatement.executeQuery();
+			while(set.next()){
+				ThreadPostedEntity AthreadPostedEntity = new ThreadPostedEntity();
+				AthreadPostedEntity.setThr_id(set.getInt("thr_id"));
+				AthreadPostedEntity.setThr_author(set.getInt("thr_author"));
+				AthreadPostedEntity.setThr_text(set.getString("thr_text"));
+				AthreadPostedEntity.setThr_type(set.getInt("thr_type"));
+				AthreadPostedEntity.setThr_enabled(set.getBoolean("thr_enabled"));
+				AthreadPostedEntity.setThr_replyto(set.getInt("thr_replyto"));
+				threadPostedEntitys.add(AthreadPostedEntity);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			this.closeConnection(connection);
+		}
+		return threadPostedEntitys;
+	}
+	
 	public List<ThreadPostedEntity> getThreadPostedEntity(ThreadPostedEntity threadPostedEntity) {
 	 	Connection connection = this.getConnection();
 		PreparedStatement preparedStatement = null;
@@ -76,6 +103,10 @@ public class ThreadPostedDao extends DBHelper{
 			preparedStatement.setInt(3, threadPostedEntity.getThr_type());
 			preparedStatement.setBoolean(4, threadPostedEntity.getThr_enabled());
 			preparedStatement.setInt(5, threadPostedEntity.getThr_replyto());
+			if(threadPostedEntity.getThr_replyto() == 0)
+			{
+				preparedStatement.setNull(5, Types.INTEGER);
+			}
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

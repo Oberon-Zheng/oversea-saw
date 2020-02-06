@@ -1,5 +1,7 @@
 package overseasaw.server.entity;
 
+import org.json.JSONObject;
+
 public class ThreadPostedEntity {
 
 	private int thr_id;
@@ -44,6 +46,33 @@ public class ThreadPostedEntity {
 	}
 	public void setThr_replyto(int thr_replyto) {
 		this.thr_replyto = thr_replyto;
+	}
+	
+	public ThreadPostedEntity()
+	{
+		
+	}
+	
+	public ThreadPostedEntity(JSONObject json)
+	{
+		thr_id = json.optInt("thr_id",0);
+		thr_author =  json.optInt("thr_author",0);
+		thr_text = json.optString("thr_text",null);
+		thr_replyto = json.optInt("thr_replyto",0);
+		thr_type = json.optInt("thr_type",0);
+		thr_enabled = json.optBoolean("thr_enable",false);
+	}
+	
+	public JSONObject Serialize()
+	{
+		JSONObject json = new JSONObject();
+		json.put("thr_id", thr_id);
+		json.put("thr_author", thr_author);
+		json.put("thr_text", thr_text);
+		json.put("thr_reply", thr_replyto);
+		json.put("thr_type", thr_type);
+		json.put("thr_enable", thr_enabled);
+		return json;
 	}
 	
 }
